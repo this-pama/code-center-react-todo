@@ -5,7 +5,11 @@ export class App extends React.Component{
     render() {
         return (
           <div>
-            <h1>Welcome To ToDo App</h1>
+            <p>Task Name: </p>
+            <p>Task Description: </p>
+            <p>Reminder Time: </p>
+            <p>Completion Time: </p>
+            <input type='checkbox' /> Completed
           </div>
         );
       }

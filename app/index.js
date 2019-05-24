@@ -5,4 +5,4 @@ import {SignIn} from "./components/sigin"
 import {SignUp} from "./components/signup"
 import {AddTask} from "./components/addTask"
 
-ReactDOM.render(<AddTask />, document.getElementById('app'));
+ReactDOM.render(<SignIn />, document.getElementById('app'));
