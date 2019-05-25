@@ -6,13 +6,18 @@ var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 })
 
 module.exports={
-    entry: __dirname + '/app/index.js',
+    entry: [ "babel-polyfill", __dirname + '/app/index.js'],
     module: {
         rules: [
             {
                 test: /\.js$/,
                 exclude:/node_modules/,
-                loader: 'babel-loader'
+                loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/preset-env',
+                              '@babel/react',{
+                              'plugins': ['@babel/plugin-proposal-class-properties']}]
+                }
             }
         ]
     },
