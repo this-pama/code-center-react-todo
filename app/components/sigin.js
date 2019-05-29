@@ -23,10 +23,6 @@ export class SignIn extends React.Component{
         this.logIn = this.logIn.bind(this)
     }
 
-    conmponentDidMount(){
-        this.props.isSignIn = this.state.isSignIn
-    }
-
      async logIn (username, password){
         var url = "https://code-center-express-app.herokuapp.com/login"
        var loginFetch = await fetch(url,{

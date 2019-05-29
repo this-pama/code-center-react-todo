@@ -2,17 +2,38 @@ import React from 'react'
 import { Switch, Route, withRouter, Link }from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { SignUp } from '../signup'
+import PropTypes from 'prop-types';
 
+// the class View is just showing the login page. It is not doing anything other than that.
+// the view class is not handling how the signin is going to be
  class View extends React.Component{
     render(){
         return(
-                <div>
-                    <p style={{color: 'red'}} >{this.props.errMessage}</p>
-                    <input placeholder="Username" name='username' type='text' value={this.props.username}  onChange= {this.props.handleUsername}/> <br />
-                    <input placeholder='Password' type='password' name='password' value={this.props.password} onChange= {this.props.handlePassword} /> <br />
-                    <button onClick= {()=> this.props.logIn(this.props.username, this.props.password) } disabled={ this.props.disable}>Log In</button> <br />
+               <div>
+                   <p>{this.props.errMessage}</p>
+                   <input 
+                        placeholder="Username" 
+                        value={this.props.username} 
+                        type="text" 
+                        onChange= {this.props.handleUsername}
+                    />
+
+                    <input 
+                        placeholder="Password" 
+                        value={this.props.password} 
+                        type="text" 
+                        onChange= {this.props.handlePassword}
+                    />
+
+                    <button
+                        onClick={()=> this.props.logIn(this.props.username, this.props.password)}
+                        disabled={this.props.disable}
+                    >
+                        Log In
+                    </button>
+
                     <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
-                </div>
+               </div> 
            
         )
     }
@@ -44,3 +65,13 @@ export class SiginView extends React.Component{
         }
 }
 
+
+View.propTypes ={
+    password : PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    handlePassword: PropTypes.func.isRequired,
+    handleUsername: PropTypes.func.isRequired,
+    disable: PropTypes.bool.isRequired,
+    errMessage: PropTypes.string.isRequired,
+    logIn: PropTypes.func.isRequired,
+}
