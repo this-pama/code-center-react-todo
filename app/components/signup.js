@@ -2,7 +2,6 @@ import React from 'react'
 import {SignUpView } from './view/signup'
 import { App } from './App';
 
-
 export class SignUp extends React.Component{
     constructor(props){
         super(props)
@@ -17,13 +16,26 @@ export class SignUp extends React.Component{
             phoneNumber: '' ,
             address: '',
             stateOfOrigin: '',
+            isSignUp: true,
+            disable:true
 
         }
         
     }
 
+    componentDidMount(){
+        this.setState({
+            userName: ''
+        })
+    }
+    
     handleFirstName= (firstName)=> {
-        if(firstName.target.value.length > 0){
+        if(firstName.target.value.length > 0 ){
+            this.setState({
+                firstName: firstName.target.value 
+            }, this.validateForm)
+        }
+        else{
             this.setState({
                 firstName: firstName.target.value 
             })
@@ -34,12 +46,22 @@ export class SignUp extends React.Component{
         if(name.target.value.length > 0){
             this.setState({
                 lastName: name.target.value 
+            }, this.validateForm)
+        }
+        else{
+            this.setState({
+                lastName: name.target.value 
             })
         }
     }
 
     handleUsername =(name) =>{
         if(name.target.value.length > 0){
+            this.setState({
+                userName: name.target.value 
+            }, this.validateForm)
+        }
+        else{
             this.setState({
                 userName: name.target.value 
             })
@@ -50,6 +72,11 @@ export class SignUp extends React.Component{
         if(name.target.value.length > 0){
             this.setState({
                 password: name.target.value 
+            }, this.validateForm)
+        }
+        else{
+            this.setState({
+                password: name.target.value 
             })
         }
     }
@@ -58,12 +85,22 @@ export class SignUp extends React.Component{
         if(name.target.value.length > 0){
             this.setState({
                 bio: name.target.value 
+            }, this.validateForm)
+        }
+        else{
+            this.setState({
+                bio: name.target.value 
             })
         }
     }
 
     handleEmail = (name) =>{
-        if(name.target.value.length > 0){
+        if(name.target.value.length > 0 ){
+            this.setState({
+                email: name.target.value 
+            }, this.validateForm)
+        }
+        else{
             this.setState({
                 email: name.target.value 
             })
@@ -74,12 +111,22 @@ export class SignUp extends React.Component{
         if(name.target.value.length > 0){
             this.setState({
                 gender: name.target.value 
+            }, this.validateForm)
+        }
+        else{
+            this.setState({
+                gender: name.target.value 
             })
         }
     }
 
     handleAddress =(name) =>{
-        if(name.target.value.length > 0){
+        if(name.target.value.length > 0 ){
+            this.setState({
+                address: name.target.value 
+            }, this.validateForm)
+        }
+        else{
             this.setState({
                 address: name.target.value 
             })
@@ -87,7 +134,12 @@ export class SignUp extends React.Component{
     }
 
     handlePhoneNumber = (name ) => {
-        if(name.target.value.length > 0){
+        if(name.target.value.length > 0 ){
+            this.setState({
+                phoneNumber: name.target.value 
+            }, this.validateForm)
+        }
+        else{
             this.setState({
                 phoneNumber: name.target.value 
             })
@@ -98,7 +150,25 @@ export class SignUp extends React.Component{
         if(name.target.value.length > 0){
             this.setState({
                 stateOfOrigin: name.target.value 
+            }, this.validateForm)
+        }
+        else{
+            this.setState({
+                stateOfOrigin: name.target.value 
             })
+        }
+    }
+
+    validateForm = () =>{
+        if(this.state.firstName.length > 0 && this.state.lastName.length > 0 && 
+            this.state.userName.length > 0 && this.state.password.length > 0
+            && this.state.phoneNumber.length > 0 && this.state.email.length > 0 
+            && this.state.stateOfOrigin.length > 0 && this.state.gender.length > 0)
+            {
+                this.setState({disable : false})
+            }
+        else{
+            this.setState({disable: true})
         }
     }
 
@@ -128,6 +198,7 @@ export class SignUp extends React.Component{
             this.props.errMessage = "There seems to be an error"
         }
         else if (res.userName){
+            this.setState({isSignUp: false})
             return <App />
         }
         else{
@@ -137,30 +208,37 @@ export class SignUp extends React.Component{
     }
 
     render(){
-        return(
-           <SignUpView 
-            firstName= { this.state.firstName}
-            lastName = {this.state.lastName}
-            userName= {this.state.userName}
-            password= {this.state.password}
-            bio={this.state.password}
-            email= {this.state.email}
-            gender = {this.state.gender}
-            phoneNumber ={this.state.phoneNumber}
-            address= {this.state.address}
-            stateOfOrigin= {this.state.stateOfOrigin}
-            handleFirstName= {this.handleFirstName}
-            handleLastName ={this.handleLastName}
-            handleUsername= {this.handleUsername}
-            handlePassword= {this.handlePassword}
-            handleBio= {this.handleBio}
-            handleEmail= {this.handleEmail}
-            handleGender= {this.handleGender}
-            handlePhoneNumber= {this.handlePhoneNumber}
-            handleAddress= {this.handleAddress}
-            handleStateOfOrigin= {this.handleStateOfOrigin}
-            signUp= {this.signUp}
-           />
-        )
+        
+        if(this.state.isSignUp){
+            return(
+                <SignUpView 
+                 firstName= { this.state.firstName}
+                 lastName = {this.state.lastName}
+                 userName= {this.state.userName}
+                 password= {this.state.password}
+                 bio={this.state.bio}
+                 email= {this.state.email}
+                 gender = {this.state.gender}
+                 phoneNumber ={this.state.phoneNumber}
+                 address= {this.state.address}
+                 stateOfOrigin= {this.state.stateOfOrigin}
+                 handleFirstName= {this.handleFirstName}
+                 handleLastName ={this.handleLastName}
+                 handleUsername= {this.handleUsername}
+                 handlePassword= {this.handlePassword}
+                 handleBio= {this.handleBio}
+                 handleEmail= {this.handleEmail}
+                 handleGender= {this.handleGender}
+                 handlePhoneNumber= {this.handlePhoneNumber}
+                 handleAddress= {this.handleAddress}
+                 handleStateOfOrigin= {this.handleStateOfOrigin}
+                 signUp= {this.signUp}
+                 disable= {this.state.disable}
+                />
+             )
+        }
+        else{
+            return <App /> 
+        }
     }
 }

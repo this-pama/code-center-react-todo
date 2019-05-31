@@ -59,7 +59,8 @@ export class SignUpView extends React.Component{
                             onChange={this.props.handleStateOfOrigin} 
                     />  <br />
                     <button 
-                        onClick={()=> this.props.signUp} 
+                        onClick={this.props.signUp}
+                        disabled={this.props.disable} 
                     >Sign Up</button> <br />
                 </div>
             </Router>
@@ -90,6 +91,7 @@ SignUpView.propTypes = {
     handleAddress: PropTypes.func.isRequired,
     handleStateOfOrigin: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
-    errMessage: PropTypes.string
+    errMessage: PropTypes.string,
+    disable: PropTypes.bool.isRequired
 
 }
