@@ -17,7 +17,7 @@ Clone this repository using the command on your terminal
  `npm install`
 
 ##### Start local server
-    `npm run start`
+    npm run start
 
 ##### Build project
-    `npm run build`
+    npm run build
