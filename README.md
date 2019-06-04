@@ -1,5 +1,5 @@
 ### Code Along React JS App 
-This is a code along session for Code Center Bootcamp Student. See [demo] (https://this-pama.github.io/code-center-react-todo/) :+1:
+This is a code along session for Code Center Bootcamp Student. See [demo](https://this-pama.github.io/code-center-react-todo/) :+1:
 
 ### Dependencies / Tools
 * React JS
@@ -9,7 +9,7 @@ This is a code along session for Code Center Bootcamp Student. See [demo] (https
 
 ### Running Locally
 Clone this repository using the command on your terminal 
- git clone https://github.com/this-pama/code-center-react-todo.git
+ `git clone https://github.com/this-pama/code-center-react-todo.git`
 
 ##### Install dependencies
 ` yarn install `
