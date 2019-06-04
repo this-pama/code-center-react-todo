@@ -9,7 +9,7 @@ This is a code along session for Code Center Bootcamp Student. See [demo](https:
 
 ### Running Locally
 Clone this repository using the command on your terminal 
-    git clone https://github.com/this-pama/code-center-react-todo.git
+    `git clone https://github.com/this-pama/code-center-react-todo.git`
 
 ##### Install dependencies
 ` yarn install `
