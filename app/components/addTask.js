@@ -11,7 +11,8 @@ export class AddTask extends React.Component{
             reminderTime: '', 
             isCompleted: false,
             disable:true,
-            errMessage: ''
+            errMessage: '',
+            spin: false
 
         }
         
@@ -96,6 +97,7 @@ export class AddTask extends React.Component{
     }
 
     addTask =  async () => {
+        this.setState({ spin : true})
         console.log('add task')
         var url = "https://code-center-express-app.herokuapp.com/task"
        var addTaskFetch = await fetch(url,{
@@ -113,7 +115,11 @@ export class AddTask extends React.Component{
         var res = await response.json()
         console.log(res)
         if(res.err){
-            this.props.errMessage = "There seems to be an error"
+            
+            this.setState({
+                errMessage:"There seems to be an error",
+                spin: false
+            })
         }
         else if (res.taskName){
             this.setState({
@@ -123,11 +129,15 @@ export class AddTask extends React.Component{
                 reminderTime: '', 
                 isCompleted: false,
                 disable:true,
-                errMessage: 'Task Successfully Added'
+                errMessage: 'Task Successfully Added',
+                spin: false
             })
         }
         else{
-            this.props.errMessage = "Network Error"
+            this.setState({
+                errMessage: "Network Error",
+                spin: false
+            })
         }
     
     }
@@ -148,6 +158,7 @@ export class AddTask extends React.Component{
                     addTask = {this.addTask}
                     disable= {this.state.disable}
                     errMessage= {this.state.errMessage}
+                    spinner= {this.state.spin}
                 />
              )
 

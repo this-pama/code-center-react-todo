@@ -14,7 +14,8 @@ export class SignIn extends React.Component{
             disable: true,
             errMessage: '',
             isSignIn: true,
-            isHome: false
+            isHome: false,
+            spin: false
         }
 
         this.handleUsername = this.handleUsername.bind(this);
@@ -24,6 +25,9 @@ export class SignIn extends React.Component{
     }
 
      async logIn (username, password){
+         
+         this.setState({spin: true})
+        //  console.log(this.state.spin)
         var url = "https://code-center-express-app.herokuapp.com/login"
        var loginFetch = await fetch(url,{
             method: "POST",
@@ -41,20 +45,23 @@ export class SignIn extends React.Component{
             this.setState({
                 isHome : true,
                 errMessage: '',
-                isSignIn: false
+                isSignIn: false,
+                spin: false
             })
             return <App />
         }
         else if(res.text){
             console.log(res.text);
             this.setState({
-                errMessage : res.text
+                errMessage : res.text,
+                spin: false
             })
             
         }
         else{
             this.setState({
-                errMessage: "Error Occurred."
+                errMessage: "Error Occurred.",
+                spin: false
             })
         }
     }
@@ -95,8 +102,9 @@ export class SignIn extends React.Component{
         }
     }
 
-
+ 
     render(){
+
         if(this.state.isSignIn){
             return <SiginView 
                 password={ this.state.password}
@@ -106,6 +114,7 @@ export class SignIn extends React.Component{
                 handleUsername = {this.handleUsername}
                 logIn= { this.logIn}
                 errMessage= { this.state.errMessage}
+                spinner= {this.state.spin}
                 />
         }
         else if (this.state.isHome){

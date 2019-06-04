@@ -1,10 +1,11 @@
 var React = require('react')
-var ReactDOM = require('react-dom') 
 import { Switch, Route, withRouter, Link }from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Card, Button, CardTitle, CardText, Row, Col, ButtonGroup, ButtonToolbar, CardHeader, Container } from 'reactstrap';
 import { EditTask } from "./editTask";
 import { Home } from "./home";
 import { AddTask } from "./addTask";
+import { SignIn } from "./sigin";
 
 
 export class App extends React.Component{
@@ -32,34 +33,53 @@ export class App extends React.Component{
 
      var allView = res.map(task =>
         (
-          <div key={task._id}>
-              <p>Task Name: {task.taskName} </p>
-              <p>Task Description: {task.description} </p>
-              <p>Reminder Time: {task.reminderTime} min</p>
-              <p>Completion Time: {task.time} </p>
-              <input type='checkbox' value={task.isCompleted} checked={task.isCompleted} onChange={(name)=>this.isCompletedUpdate(task._id, name.target.checked )}/> Completed <br />
-              <button onClick={()=> this.setState({taskId: task._id})}><Link to='/Edit' > Edit </Link></button>
-              <button onClick={()=> this.deleteTask(task._id)}>Delete</button>
-          </div>
+          <Col sm="6" key={task._id}>
+          <CardHeader>{task.taskName}</CardHeader>
+            <Card body>
+              <CardText>{task.description}</CardText>
+              <CardText>Reminder Time: {task.reminderTime}</CardText>
+              <CardText>Completion Time: {task.time}</CardText>
+              <CardText>
+                <input type='checkbox' 
+                  value={task.isCompleted} 
+                  checked={task.isCompleted} 
+                  onChange={(name)=>this.isCompletedUpdate(task._id, name.target.checked )}
+                /> Completed
+              </CardText>
+              <ButtonToolbar >
+              <ButtonGroup >
+              <Button style={{color:'black'}}
+                onClick={()=> this.setState({taskId: task._id})}
+              >
+              <Link to='/Edit' > Edit </Link>
+              </Button>
+              <Button  
+                onClick={()=> this.deleteTask(task._id)}
+              >Delete
+              </Button>
+              </ButtonGroup>
+              </ButtonToolbar>
+            </Card>
+          </Col>
         )
      )
-    console.log(allView)
+    // console.log(allView)
 
      this.setState({maptask : allView})
   }
 
   isCompletedUpdate = async (taskId, name) => {
     var url = `https://code-center-express-app.herokuapp.com/update/${taskId}`
-       var addTaskFetch = await fetch(url,{
+       var updateTaskFetch = await fetch(url,{
             method: "PATCH",
             headers: {'content-type': 'application/json'},
             body: JSON.stringify({
                 isCompleted: name 
             }),
         })
-        var response = await addTaskFetch
+        var response = await updateTaskFetch
         var res = await response.json()
-        console.log(res)
+        // console.log(res)
         this.getAllTask()
   }
 
@@ -72,28 +92,36 @@ export class App extends React.Component{
      })
      var response = await deleteFetch
      var res = await response.json()
-     console.log(res)
+    //  console.log(res)
      this.getAllTask()
   }
     render() {
         return (
           <Router>
+            
             <Switch location={location}>
             
-              <Route exact path='/' render= {()=> 
-                  <div>
-                    <button ><Link to='/addTask'> Add Task </Link></button> 
-                    {this.state.maptask}
-                  </div>
-                }
-              />
-
-              <Route path='/edit' render={()=>
-                <EditTask 
-                  taskId= {this.state.taskId}
+                <Route exact path='/' render= {()=> 
+                    <div>
+                      <Container>
+                        <Home /> 
+                      
+                        <Row style={{paddingTop: 20}}>
+                        {this.state.maptask}
+                        </Row>
+                      </Container>
+                    </div>
+                  }
                 />
-              } />
-              <Route path='/addTask' component={AddTask} />
+
+                <Route path='/edit' render={()=>
+                  <EditTask 
+                    taskId= {this.state.taskId}
+                  />
+                } />
+                <Route  exact path='/home' component={App} />
+                <Route path='/addTask' component={AddTask} />
+                <Route path='/logout' component={SignIn} />
             </Switch>
           </Router>
         )

@@ -14,7 +14,8 @@ export class EditTask extends React.Component{
             isCompleted: false,
             disable:true,
             errMessage: '',
-            isTask: true
+            isTask: true,
+            spin: false
 
         }
         
@@ -102,6 +103,7 @@ export class EditTask extends React.Component{
     }
 
     addTask =  async () => {
+        this.setState({spin: true})
         var url = `https://code-center-express-app.herokuapp.com/update/${this.props.taskId}`
        var addTaskFetch = await fetch(url,{
             method: "PATCH",
@@ -119,7 +121,8 @@ export class EditTask extends React.Component{
         console.log(res)
         if(res.err){
             this.setState({
-                errMessage : "There seems to be an error"
+                errMessage : "There seems to be an error",
+                spin: false
             }) 
         }
         else if (res.taskName){
@@ -131,13 +134,15 @@ export class EditTask extends React.Component{
                 isCompleted: false,
                 disable:true,
                 errMessage: 'Task Successfully Updated',
-                isTask: false
+                isTask: false,
+                spin: false
             })
             return <App />
         }
         else{
             this.setState({
-                errMessage : "Network Error"
+                errMessage : "Network Error",
+                spin: false
             }) 
         }
     
@@ -160,6 +165,7 @@ export class EditTask extends React.Component{
                         addTask = {this.addTask}
                         disable= {this.state.disable}
                         errMessage= {this.state.errMessage}
+                        spinner= {this.state.spin}
                     />
                  )
             }

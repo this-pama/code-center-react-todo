@@ -4,36 +4,54 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { SignUp } from '../signup'
 import PropTypes from 'prop-types';
 
+import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, Spinner } from 'reactstrap';
+
 // the class View is just showing the login page. It is not doing anything other than that.
 // the view class is not handling how the signin is going to be
  class View extends React.Component{
     render(){
+        const spinner =  <Spinner size="md"   />
+
+        
         return(
-               <div>
-                   <p>{this.props.errMessage}</p>
-                   <input 
-                        placeholder="Username" 
-                        value={this.props.username} 
-                        type="text" 
-                        onChange= {this.props.handleUsername}
-                    />
+            <Container >
+                <Row style={{alignItems: 'center', justifyContent: 'center', alignItems: 'center', textAlign: 'center', paddingTop: 50, marginTop:50}} >
+                    <Col xs="6" sm="4"></Col>
+                    <Col xs="6" sm="4">
+                    <h4>Code Center Todo</h4>
+                    <Form>
+                        <FormGroup>
+                        <p style={{color: 'red'}}>{this.props.errMessage}</p>
+                        <Input 
+                                placeholder="Username" 
+                                value={this.props.username} 
+                                type="text" 
+                                onChange= {this.props.handleUsername}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Input 
+                                placeholder="Password" 
+                                value={this.props.password} 
+                                type="text" 
+                                onChange= {this.props.handlePassword}
+                            />
+                        </FormGroup>
+                    
+                            <Button color="primary" size="lg" block
+                                onClick={()=> this.props.logIn(this.props.username, this.props.password)}
+                                disabled={this.props.disable}
+                            >
+                                Log In
+                                {this.props.spinner ? spinner : null}
+                                </Button>
 
-                    <input 
-                        placeholder="Password" 
-                        value={this.props.password} 
-                        type="text" 
-                        onChange= {this.props.handlePassword}
-                    />
-
-                    <button
-                        onClick={()=> this.props.logIn(this.props.username, this.props.password)}
-                        disabled={this.props.disable}
-                    >
-                        Log In
-                    </button>
-
-                    <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
-               </div> 
+                            <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+                    </Form>
+                    </Col>
+                    <Col xs="6" sm="4"></Col>
+                </Row>
+               </Container>
            
         )
     }
@@ -54,6 +72,7 @@ export class SiginView extends React.Component{
                                 disable={this.props.disable}
                                 errMessage= {this.props.errMessage}
                                 logIn={this.props.logIn}
+                                spinner={this.props.spinner}
                             /> 
                         }/>
                         />

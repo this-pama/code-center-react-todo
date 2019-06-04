@@ -17,7 +17,8 @@ export class SignUp extends React.Component{
             address: '',
             stateOfOrigin: '',
             isSignUp: true,
-            disable:true
+            disable:true,
+            spin: false
 
         }
         
@@ -173,6 +174,7 @@ export class SignUp extends React.Component{
     }
 
     signUp =  async () => {
+        this.setState({spin: true})
         var url = "https://code-center-express-app.herokuapp.com/signup"
        var signUpFetch = await fetch(url,{
             method: "POST",
@@ -195,14 +197,23 @@ export class SignUp extends React.Component{
         var res = await response.json()
         console.log(res)
         if(res.err){
-            this.props.errMessage = "There seems to be an error"
+            this.setState({
+                spin: false,
+                errMessage: "There seems to be an error"
+            })
         }
         else if (res.userName){
-            this.setState({isSignUp: false})
+            this.setState({
+                isSignUp: false,
+                spin: false
+            })
             return <App />
         }
         else{
-            this.props.errMessage = "Network Error"
+            this.setState({
+                spin: false,
+                errMessage: "Network Error"
+            })
         }
     
     }
@@ -234,6 +245,7 @@ export class SignUp extends React.Component{
                  handleStateOfOrigin= {this.handleStateOfOrigin}
                  signUp= {this.signUp}
                  disable= {this.state.disable}
+                 spinner= {this.state.spin}
                 />
              )
         }
