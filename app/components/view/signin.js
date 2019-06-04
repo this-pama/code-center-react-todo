@@ -14,6 +14,7 @@ import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, S
 
         
         return(
+            <Router>
             <Container >
                 <Row style={{alignItems: 'center', justifyContent: 'center', alignItems: 'center', textAlign: 'center', paddingTop: 50, marginTop:50}} >
                     <Col xs="6" sm="4"></Col>
@@ -52,6 +53,7 @@ import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, S
                     <Col xs="6" sm="4"></Col>
                 </Row>
                </Container>
+               </Router>
            
         )
     }

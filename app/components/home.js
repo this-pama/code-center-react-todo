@@ -44,7 +44,7 @@ export  class Home extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/">Home</NavLink>
+                <NavLink href="/home"><Link to='/home'> Home </Link></NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/addTask"> <Link to='/addTask'>Add Task </Link></NavLink>

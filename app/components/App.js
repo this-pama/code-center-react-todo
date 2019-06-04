@@ -119,9 +119,7 @@ export class App extends React.Component{
                     taskId= {this.state.taskId}
                   />
                 } />
-                <Route  exact path='/home' component={App} />
-                <Route path='/addTask' component={AddTask} />
-                <Route path='/logout' component={SignIn} />
+                
             </Switch>
           </Router>
         )

@@ -8,4 +8,4 @@ import {AddTask} from "./components/addTask"
 import { EditTask } from './components/editTask';
 
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<SignIn />, document.getElementById('app'));
