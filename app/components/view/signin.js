@@ -47,7 +47,7 @@ import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, S
                                 {this.props.spinner ? spinner : null}
                                 </Button>
 
-                            <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+                            <p style={{paddingTop: 20}}>Don't have an account? <Link to="/signup">Sign Up</Link></p>
                     </Form>
                     </Col>
                     <Col xs="6" sm="4"></Col>
