@@ -120,6 +120,8 @@ export class App extends React.Component{
                   />
                 } />
                 
+                <Route path='/addTask' component={AddTask} />
+                <Route path='/logout' component={SignIn} />
             </Switch>
           </Router>
         )
