@@ -25,7 +25,7 @@ module.exports={
     },
     output:{
         filename: 'build.js',
-        path: __dirname + '/build'
+        path: __dirname + '/doc'
     },
     plugins: [HTMLWebpackPluginConfig]
 }
