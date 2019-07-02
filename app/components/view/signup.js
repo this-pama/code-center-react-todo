@@ -10,7 +10,7 @@ export class SignUpView extends React.Component{
         return(
             <Router>
                  <Container >
-                <Row style={{alignItems: 'center', justifyContent: 'center', alignItems: 'center', textAlign: 'center', paddingTop: 50, marginTop:50}} >
+                <Row style={{alignItems: 'center', justifyContent: 'center', alignItems: 'center', textAlign: 'center', paddingTop: 20, paddingBottom: 20}} >
                     <Col  sm="3"></Col>
                     <Col  sm="6">
                     <h4>Code Center Todo</h4>

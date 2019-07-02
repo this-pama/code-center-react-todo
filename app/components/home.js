@@ -55,9 +55,9 @@ export  class Home extends React.Component {
             </Nav>
           </Collapse>
         </Navbar>
-                <Route  exact path='/home' component={App} />
+                {/* <Route  exact path='/home' component={App} />
                 <Route path='/addTask' component={AddTask} />
-                <Route path='/logout' component={SignIn} />
+                <Route path='/logout' component={SignIn} /> */}
       </div>
     );
   }
